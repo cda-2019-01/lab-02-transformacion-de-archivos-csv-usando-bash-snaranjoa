@@ -10,9 +10,9 @@ wc -l estacion1.csv estacion2.csv estacion3.csv estacion4.csv
 
 #Unir las bases
 cat estacion_1.csv > estaciones.csv
-tail +2 estacion2.csv >> estaciones.csv
-tail +2 estacion3.csv >> estaciones.csv
-tail +2 estacion4.csv >> estaciones.csv
+tail +2 estacion_2.csv >> estaciones.csv
+tail +2 estacion_3.csv >> estaciones.csv
+tail +2 estacion_4.csv >> estaciones.csv
 wc -l estaciones.csv
 
 #Actualizar nombres de campos
@@ -29,7 +29,8 @@ sed 's;/\([0-9][0-9]\),;/20\1,;' estaciones3.csv > estaciones4.csv
 sed 's;/\([0-9][0-9]\)/\([0-9][0-9][0-9][0-9]\),;/\1/\2,\1,\2,;' estaciones4.csv > estaciones5.csv
 sed 's/,\([0-9][0-9]\):/,\1,\1:/' estaciones5.csv > estaciones6.csv
 awk 'BEGIN{print "FECHA,MES,ANO,HORA,HHMMSS,DIR,VEL,EST"}(NR>1){print $0}' estaciones6.csv > finalestaciones.csv
-head finalestaciones.csv
+head -n 5 finalestaciones.csv
+tail -n 5 finalestaciones.csv
 
 #Obtener titulos
 csvcut -n finalestaciones.csv
